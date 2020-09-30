@@ -2,8 +2,8 @@ package com.dtsedemo.mtwoauth.ui.base
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.dtsedemo.mtwoauth.common.toast
 import com.dtsedemo.mtwoauth.model.ResultEvent
 import com.dtsedemo.mtwoauth.viewmodel.BaseViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -32,7 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
                 is ResultEvent.Error -> {
                 }
                 is ResultEvent.InProgress -> {
-                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+                    toast("Loading...")
                 }
             }
         }

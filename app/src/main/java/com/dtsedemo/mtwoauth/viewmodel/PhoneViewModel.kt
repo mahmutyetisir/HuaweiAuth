@@ -13,11 +13,11 @@ class PhoneViewModel(private val manager: HuaweiPhoneAuthManagerImpl) : BaseView
     var logoutSubscription = Consumer<ResultEvent<Unit>> {}
 
     fun login(phoneNumber: String, password: String) {
-        manager.login(phoneNumber, password).subscribeMultiple(this, loginSubscription)
+        manager.job.login(phoneNumber, password).subscribeMultiple(this, loginSubscription)
     }
 
     fun register(phoneNumber: String) {
-        manager.register(phoneNumber).subscribeMultiple(this, registerSubscription)
+        manager.job.register(phoneNumber).subscribeMultiple(this, registerSubscription)
     }
 
     fun verifyCode(
@@ -25,15 +25,15 @@ class PhoneViewModel(private val manager: HuaweiPhoneAuthManagerImpl) : BaseView
         password: String,
         verifyCode: String
     ) {
-        manager.verifyCode(phoneNumber, password, verifyCode)
+        manager.job.verifyCode(phoneNumber, password, verifyCode)
             .subscribeMultiple(this, verifySubscription)
     }
 
     fun logout() {
-        manager.logout().subscribeMultiple(this, logoutSubscription)
+        manager.job.logout().subscribeMultiple(this, logoutSubscription)
     }
 
     fun getUser(): User? {
-        return manager.getUser()
+        return manager.job.getUser()
     }
 }

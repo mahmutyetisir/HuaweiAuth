@@ -4,6 +4,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.dtsedemo.mtwoauth.R
 import com.dtsedemo.mtwoauth.common.click
+import com.dtsedemo.mtwoauth.common.toast
 import com.dtsedemo.mtwoauth.model.ResultEvent
 import com.dtsedemo.mtwoauth.ui.base.BaseActivity
 import com.dtsedemo.mtwoauth.viewmodel.EmailViewModel
@@ -36,11 +37,7 @@ class MailRegisterActivity : BaseActivity() {
                     )
                 }
                 is ResultEvent.Error -> {
-                    Toast.makeText(
-                        MainActivity@ this,
-                        "kod gönderilemedi ${it.exception.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    toast("kod gönderilemedi ${it.exception.message}")
                 }
             }
         }

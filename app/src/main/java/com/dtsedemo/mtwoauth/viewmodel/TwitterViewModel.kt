@@ -11,14 +11,14 @@ class TwitterViewModel(private val manager: TwitterAuthManagerImpl) : BaseViewMo
     var logoutSubscription = Consumer<ResultEvent<Unit>> {}
 
     fun login(accessToken: String, secret: String) {
-        manager.login(accessToken, secret).subscribeMultiple(this, loginSubscription)
+        manager.job.login(accessToken, secret).subscribeMultiple(this, loginSubscription)
     }
 
     fun logout() {
-        manager.logout().subscribeMultiple(this, logoutSubscription)
+        manager.job.logout().subscribeMultiple(this, logoutSubscription)
     }
 
     fun getUser(): User? {
-        return manager.getUser()
+        return manager.job.getUser()
     }
 }

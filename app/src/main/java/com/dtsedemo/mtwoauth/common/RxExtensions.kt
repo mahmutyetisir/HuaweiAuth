@@ -29,7 +29,7 @@ fun <T : ResultEvent<*>> Observable<T>.subscribeMultiple(
     subscribe(taskConsumer).addTo(baseViewModel.disposeBag)
 }
 
-fun <S : Any> Any.observableCreate(callback: (subscriber: ObservableEmitter<ResultEvent<S>>) -> Unit): Observable<ResultEvent<S>> {
+fun <S : Any> observableCreate(callback: (subscriber: ObservableEmitter<ResultEvent<S>>) -> Unit): Observable<ResultEvent<S>> {
     return Observable.create {
         it.onNext(ResultEvent.InProgress)
         callback.invoke(it)

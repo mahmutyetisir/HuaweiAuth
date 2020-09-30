@@ -13,11 +13,11 @@ class EmailViewModel(private val manager: HuaweiEmailAuthManagerImpl) : BaseView
     var logoutSubscription = Consumer<ResultEvent<Unit>> {}
 
     fun login(email: String, password: String) {
-        manager.login(email, password).subscribeMultiple(this, loginSubscription)
+        manager.job.login(email, password).subscribeMultiple(this, loginSubscription)
     }
 
     fun register(email: String) {
-        manager.register(email).subscribeMultiple(this, registerSubscription)
+        manager.job.register(email).subscribeMultiple(this, registerSubscription)
     }
 
     fun verifyCode(
@@ -25,14 +25,15 @@ class EmailViewModel(private val manager: HuaweiEmailAuthManagerImpl) : BaseView
         password: String,
         verifyCode: String
     ) {
-        manager.verifyCode(email, password, verifyCode).subscribeMultiple(this, verifySubscription)
+        manager.job.verifyCode(email, password, verifyCode)
+            .subscribeMultiple(this, verifySubscription)
     }
 
     fun logout() {
-        manager.logout().subscribeMultiple(this, logoutSubscription)
+        manager.job.logout().subscribeMultiple(this, logoutSubscription)
     }
 
     fun getUser(): User? {
-        return manager.getUser()
+        return manager.job.getUser()
     }
 }

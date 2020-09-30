@@ -28,8 +28,6 @@ class MailWelcomeActivity : BaseWelcomeActivity() {
                 is ResultEvent.Success -> {
                     showWelcomeFragment()
                 }
-                is ResultEvent.Error -> {
-                }
             }
         }
     }

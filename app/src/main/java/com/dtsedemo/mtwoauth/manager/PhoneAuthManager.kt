@@ -33,7 +33,7 @@ class HuaweiPhoneAuthManagerImpl(
                 password
             )
 
-            AGConnectAuth.getInstance().signIn(credential)
+            agConnectAuth.signIn(credential)
                 .addOnSuccessListener {
                     subscriber.onNext(ResultEvent.Success(true))
                     subscriber.onComplete()
@@ -76,22 +76,13 @@ class HuaweiPhoneAuthManagerImpl(
                 .setVerifyCode(verifyCode)
                 .build()
 
-            AGConnectAuth.getInstance().createUser(user).addOnSuccessListener {
+            agConnectAuth.createUser(user).addOnSuccessListener {
                 subscriber.onNext(ResultEvent.Success(true))
                 subscriber.onComplete()
             }.addOnFailureListener {
                 subscriber.onNext(ResultEvent.Error(it))
                 subscriber.onComplete()
             }
-        }
-    }
-
-
-    override fun logout(): Observable<ResultEvent<Unit>> {
-        return observableCreate {
-            agConnectAuth.signOut()
-            it.onNext(ResultEvent.Success(Unit))
-            it.onComplete()
         }
     }
 

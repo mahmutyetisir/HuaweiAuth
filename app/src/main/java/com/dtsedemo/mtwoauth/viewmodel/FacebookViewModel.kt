@@ -11,14 +11,14 @@ class FacebookViewModel(private val manager: FacebookAuthManagerImpl) : BaseView
     var logoutSubscription = Consumer<ResultEvent<Unit>> {}
 
     fun login(accessToken: String) {
-        manager.login(accessToken).subscribeMultiple(this, loginSubscription)
+        manager.job.login(accessToken).subscribeMultiple(this, loginSubscription)
     }
 
     fun logout() {
-        manager.logout().subscribeMultiple(this, logoutSubscription)
+        manager.job.logout().subscribeMultiple(this, logoutSubscription)
     }
 
     fun getUser(): User? {
-        return manager.getUser()
+        return manager.job.getUser()
     }
 }

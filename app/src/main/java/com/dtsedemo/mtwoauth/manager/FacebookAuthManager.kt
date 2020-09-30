@@ -19,8 +19,7 @@ class FacebookAuthManagerImpl(agConnectAuth: AGConnectAuth) :
 
     override fun login(accessToken: String): Observable<ResultEvent<Boolean>> {
         return observableCreate { subscriber ->
-            AGConnectAuth.getInstance()
-                .signIn(FacebookAuthProvider.credentialWithToken(accessToken))
+            agConnectAuth.signIn(FacebookAuthProvider.credentialWithToken(accessToken))
                 .addOnSuccessListener {
                     subscriber.onNext(ResultEvent.Success(true))
                     subscriber.onComplete()
@@ -29,14 +28,6 @@ class FacebookAuthManagerImpl(agConnectAuth: AGConnectAuth) :
                     subscriber.onNext(ResultEvent.Error(it))
                     subscriber.onComplete()
                 }
-        }
-    }
-
-    override fun logout(): Observable<ResultEvent<Unit>> {
-        return observableCreate {
-            agConnectAuth.signOut()
-            it.onNext(ResultEvent.Success(Unit))
-            it.onComplete()
         }
     }
 

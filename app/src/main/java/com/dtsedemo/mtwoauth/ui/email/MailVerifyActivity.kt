@@ -5,6 +5,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.dtsedemo.mtwoauth.R
 import com.dtsedemo.mtwoauth.common.click
+import com.dtsedemo.mtwoauth.common.toast
 import com.dtsedemo.mtwoauth.model.ResultEvent
 import com.dtsedemo.mtwoauth.ui.base.BaseActivity
 import com.dtsedemo.mtwoauth.viewmodel.EmailViewModel
@@ -60,18 +61,10 @@ class MailVerifyActivity : BaseActivity() {
                     intent.putExtra("register_state", true)
                     setResult(RESULT_OK, intent)
                     onBackPressed()
-                    Toast.makeText(
-                        MailVerifyActivity@ this,
-                        "Kullanıcı oluşturuldu",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    toast("Kullanıcı oluşturuldu")
                 }
                 is ResultEvent.Error -> {
-                    Toast.makeText(
-                        MailVerifyActivity@ this,
-                        "Kullanıcı oluşturulamadı ${it.exception.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    toast("Kullanıcı oluşturulamadı ${it.exception.message}")
                 }
             }
         }

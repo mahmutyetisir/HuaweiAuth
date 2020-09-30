@@ -1,8 +1,8 @@
 package com.dtsedemo.mtwoauth.ui.email
 
-import android.widget.Toast
 import com.dtsedemo.mtwoauth.R
 import com.dtsedemo.mtwoauth.common.click
+import com.dtsedemo.mtwoauth.common.toast
 import com.dtsedemo.mtwoauth.model.ResultEvent
 import com.dtsedemo.mtwoauth.ui.base.BaseActivity
 import com.dtsedemo.mtwoauth.viewmodel.EmailViewModel
@@ -30,15 +30,11 @@ class MailLoginActivity : BaseActivity() {
         viewModel.loginSubscription = Consumer {
             when (it) {
                 is ResultEvent.Success -> {
-                    Toast.makeText(this, "Giriş Yapıldı", Toast.LENGTH_SHORT).show()
+                    toast("Giriş Yapıldı")
                     onBackPressed()
                 }
                 is ResultEvent.Error -> {
-                    Toast.makeText(
-                        this,
-                        "Giriş yapılamadı hata: ${it.exception.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toast("Giriş yapılamadı hata: ${it.exception.message}")
                 }
             }
         }

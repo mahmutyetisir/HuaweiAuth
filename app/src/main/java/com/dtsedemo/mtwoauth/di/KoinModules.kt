@@ -11,8 +11,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.util.*
 
-object SMSProvider {
-
+object VerifyCode {
     fun getSettings(): VerifyCodeSettings = VerifyCodeSettings.newBuilder()
         .action(VerifyCodeSettings.ACTION_REGISTER_LOGIN) //ACTION_REGISTER_LOGIN/ACTION_RESET_PASSWORD
         .sendInterval(30) // Minimum sending interval, which ranges from 30s to 120s.
@@ -21,7 +20,7 @@ object SMSProvider {
 }
 
 val myModule = module {
-    single { SMSProvider.getSettings() }
+    single { VerifyCode.getSettings() }
     single { AGConnectAuth.getInstance() }
 }
 

@@ -1,8 +1,6 @@
 package com.dtsedemo.mtwoauth.ui.facebook
 
 import android.content.Intent
-import android.util.Log
-import android.widget.Toast
 import com.dtsedemo.mtwoauth.R
 import com.dtsedemo.mtwoauth.common.toast
 import com.dtsedemo.mtwoauth.model.ResultEvent
@@ -33,11 +31,8 @@ class FacebookWelcomeActivity : BaseWelcomeActivity() {
     override fun observe() {
         viewModel.loginSubscription = Consumer {
             when (it) {
-                is ResultEvent.InProgress -> {
-                    toast("yükleniyor")
-                }
                 is ResultEvent.Success -> {
-                    toast(it.data.toString())
+                    toast("Giriş Yapıldı")
                     showProfileFragment()
                 }
                 is ResultEvent.Error -> {
@@ -81,6 +76,5 @@ class FacebookWelcomeActivity : BaseWelcomeActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         faceBookCallbackManager?.onActivityResult(requestCode, resultCode, data)
-        Log.d("facebooklogin", "$requestCode --- $resultCode --- ${data?.extras}")
     }
 }

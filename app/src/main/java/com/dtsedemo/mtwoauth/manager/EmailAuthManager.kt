@@ -26,7 +26,6 @@ class HuaweiEmailAuthManagerImpl(
     override val job: EmailAuthManager = this
 
     override fun login(email: String, password: String): Observable<ResultEvent<Boolean>> {
-
         return observableCreate { subscriber ->
 
             val credential = EmailAuthProvider.credentialWithPassword(
@@ -34,7 +33,7 @@ class HuaweiEmailAuthManagerImpl(
                 password
             )
 
-            AGConnectAuth.getInstance().signIn(credential)
+            agConnectAuth.signIn(credential)
                 .addOnSuccessListener {
                     subscriber.onNext(ResultEvent.Success(true))
                     subscriber.onComplete()
@@ -57,7 +56,6 @@ class HuaweiEmailAuthManagerImpl(
                 subscriber.onComplete()
             }.addOnFailureListener {
                 subscriber.onNext(ResultEvent.Error(it))
-                //subscriber.onNext(ResultEvent.Success(true))
                 subscriber.onComplete()
             }
         }
@@ -76,21 +74,13 @@ class HuaweiEmailAuthManagerImpl(
                 .setVerifyCode(verifyCode)
                 .build()
 
-            AGConnectAuth.getInstance().createUser(user).addOnSuccessListener {
+            agConnectAuth.createUser(user).addOnSuccessListener {
                 subscriber.onNext(ResultEvent.Success(true))
                 subscriber.onComplete()
             }.addOnFailureListener {
                 subscriber.onNext(ResultEvent.Error(it))
                 subscriber.onComplete()
             }
-        }
-    }
-
-    override fun logout(): Observable<ResultEvent<Unit>> {
-        return observableCreate {
-            agConnectAuth.signOut()
-            it.onNext(ResultEvent.Success(Unit))
-            it.onComplete()
         }
     }
 

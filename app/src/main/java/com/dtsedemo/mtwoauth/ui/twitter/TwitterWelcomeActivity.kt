@@ -33,7 +33,7 @@ class TwitterWelcomeActivity : BaseWelcomeActivity() {
         viewModel.loginSubscription = Consumer {
             when (it) {
                 is ResultEvent.Success -> {
-                    toast(it.data.toString())
+                    toast("Giriş Yapıldı")
                     showProfileFragment()
                 }
                 is ResultEvent.Error -> {
