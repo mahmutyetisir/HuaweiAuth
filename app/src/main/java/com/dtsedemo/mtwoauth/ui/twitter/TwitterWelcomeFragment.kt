@@ -27,10 +27,6 @@ class TwitterWelcomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val authConfig = TwitterAuthConfig("APP_ID", "APP_SECRET")
-        val twitterConfig =
-            TwitterConfig.Builder(this.context).twitterAuthConfig(authConfig).build()
-        Twitter.initialize(twitterConfig)
 
         buttonCallback.invoke(btn_twitter_login)
 

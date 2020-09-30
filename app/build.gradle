@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.huawei.agconnect:agconnect-core:1.4.1.300'
     implementation 'com.huawei.agconnect:agconnect-auth:1.4.1.300'
     implementation 'com.facebook.android:facebook-login:5.15.3'
+    implementation 'com.twitter.sdk.android:twitter:3.1.0'
     implementation 'com.twitter.sdk.android:twitter-core:3.3.0'
 
     implementation 'com.google.android.material:material:1.2.1'
